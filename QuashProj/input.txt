@@ -1,0 +1,7 @@
+ls -l
+echo "hello world"
+sleep 2 &
+sleep 3 &
+sleep 15 &
+sleep 3
+quit

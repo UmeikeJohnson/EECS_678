@@ -1,0 +1,49 @@
+
+Name: Johnson Umeike
+Student ID: 3094849
+
+
+This Program implements the basic shell functionalities as stated in the quash.pdf document. I completed all four tiers, including mixing pipes & redirects for additional credits. 
+
+-jobs (displays currently running jobs. However, if a job ends before a kill signal is sent to it, it persists in the list until a kill is explicitly issued to remove it from the list)
+
+-kill (terminates a background job and removes it from the list of running jobs)
+
+-cat
+
+-pwd
+
+-cd
+
+-echo
+
+-pipes and redirects (e.g. cat < 'file', cat < file | grep 'pattern')
+
+-find
+
+-grep (NB. Quash doesn't expect single or double quotes in the pattern. eg. find | grep "txt" wouldn't work but find | grep txt would work)
+
+-program execution using "./" (NB: Quash searchs the environment variable PATH for an executable if not present in the current directory)
+
+-background processes using '&'
+
+-mixing pipes and redirects (eg. cat inFile.txt | grep pattern | cat > outFile.txt)
+
+-append redirection (eg. cat inFile.txt | grep pattern | cat >> outFile.txt , echo "hello" >> outFile.txt)
+
+-pipes and redirects work with inbuild command (eg. cat inFile.txt >> test.txt ,  find | grep pattern > outFile.txt)
+
+-quit & exit
+
+Additionally, the shell can execute other functions like
+-vim
+-printenv
+-less
+-more
+-top
+-clear
+-rm
+-sleep
+and much more (execvp is used for these implementations in the last else statement on line 514)
+
+Finally, memory leaks were also taken care of by explicit calls to delete() and free().

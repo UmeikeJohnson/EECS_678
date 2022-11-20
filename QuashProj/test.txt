@@ -1,0 +1,6 @@
+argList: cd
+cd /usr
+uit
+_VAR"
+file7
+quit

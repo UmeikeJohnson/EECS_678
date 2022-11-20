@@ -1,0 +1,43 @@
+Requirements
+-Fork and exec processes upon user request
+	-ensure commands entered are execed according to foreground/background spec (& at end of entire command string)
+
+JobList: contains Job items ([JOBID] PID COMMAND) <-- need two ints and a string
+	-can implement with a unordered_map (hash using PID, Job stores both PID and JOBID and
+		COMMAND as a string)
+-CLI: print [QUASH] on each line, parse input strings submitted by user
+	-parse using Grammar, if grammar fails:
+		-
+
+Joblist Maintenance:
+	-when a command is exec'd in background mode we need to add it to the current joblist in case
+	jobs command is called
+	-after forking and adding to joblist create a waiter thread
+	-upon receiving sigchld thread, try joining with each waiter thread, updating joblist
+
+JobList maintenance v2: (allow separate thread to wait on background processes)
+	-single waiter thread that is created on quash start
+	-thread periodically calls waitpid w WNOHANG on all child processes to detect changes
+	waitpid(-1
+	--extr: WUNTRACED and WCONTINUED will allow checking for paused processes
+		-upon process change, acquire mutex lock on joblist, iterate and find dead process, update 
+		joblist
+		-
+	-fork exec child process, --> keep pid and update joblist (regardless of foreground or background
+	??)
+	
+
+Questions?:
+
+When to update status of job to terminated
+
+
+Questions about builtins??
+
+--still to add:
+quit and exit to exit out of quash
+getting input to quash
+redirection
+support pipes
+
+EXTRA: kill command and multiple piping

@@ -1,0 +1,17 @@
+Features:
+
+Command Execution: Foreground and background commands allowed. Implemented using the creation of a waiter thread on Quash execution. Quash main thread masks all signals, but the waiter thread has all TODO SIGCHLD unmasked allowing it to call the sig_dead_child signal handler upon signal reception. The signal handler acquires a mutex lock on the job list data structure to delete completed jobs.
+Actual command execution is done using fork and exec system calls. (execv for executables in current directory, execvp for searching PATH)
+
+Quit and Exit Commands: Upon receiving the exit or quit command, the application immediately calls exit(), closing both threads.
+
+cd (change directory): calls the changedir system call to change working directory of process (outputs error if unsuccessfull). If called with no arguments, attempts to set to current directory.
+
+jobs command: jobs command prints a list of currently running background processes by obtaining a mutex on the the joblist and iterating over all entries, printing stored job info (id, pid, and command exec'd)
+-upon termination, signal handler calls updateJobList() function which prints terminated jobs to standard output and removes old jobs from joblist
+
+set command: Implemented using putenv() command. Supports modifying the PATH and HOME environment variables.
+
+redirection: operators > and < are supported for redirecting input from or to a given file (if the file failed to be opened an error is reported). Implemented using dup2(openFilefd, 0|1) 
+
+pipes (multiple) : implemented using a for loop of fork, exec calls with redirection dups applied after dups connecting processes respective outputs to following process's input

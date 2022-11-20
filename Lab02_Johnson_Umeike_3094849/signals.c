@@ -104,16 +104,16 @@ int main(int argc, char* argv[])
   /* keep in mind which fields of the sigaction structs to fill before "registering" the sigactions */
   //YOUR CODE
 
-  sa_int.sa_handler = catch_int;
-  sa_int.sa_mask = mask_set;
-  sigaction(SIGINT, &sa_int, NULL);
+  sa_int.sa_handler = catch_int; //specifies the signal handler
+  sa_int.sa_mask = mask_set;   //specifies the mask set
+  sigaction(SIGINT, &sa_int, NULL);  //assigns a signal handler based on the contents of sigaction struct
 
   sa_tstp.sa_handler = catch_tstp;
   sa_tstp.sa_mask = mask_set;
   sigaction(SIGTSTP, &sa_tstp, NULL);
 
   sa_alrm.sa_handler = catch_alrm;
-  //sa_alrm.sa_mask = mask_set;
+  sa_alrm.sa_mask = mask_set;
   sigaction(SIGALRM, &sa_alrm, NULL);
   /* STEP - 6 (10 points) */
   /* ensure that the program keeps running to receive the signals */

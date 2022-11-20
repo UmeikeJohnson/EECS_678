@@ -1,0 +1,2 @@
+-Can execute jobs in foregound or background using a busy waiting thread to manage the joblist
+	-implement this using a signal handler instead of busy waiting? 

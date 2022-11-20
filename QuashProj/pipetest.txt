@@ -1,0 +1,2 @@
+cat Functions.cpp | grep g | sort | head -4 > pipetest.out
+jobs
